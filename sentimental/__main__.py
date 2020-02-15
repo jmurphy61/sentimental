@@ -90,10 +90,9 @@ def predict(stock_ticker: str, url: str):
     words = read_article(url)
     article_impact = 0
     for word in words:
-        word_obj = SESSION.query(Word).filter_by(literal=word).first()
+        word_obj = SESSION.query(Word).filter_by(literal=word.lower()).first()
         if word_obj:
             article_impact += word_obj.average_impact_on(stock_ticker)
-    print(words)
     return article_impact
 
 def main():
